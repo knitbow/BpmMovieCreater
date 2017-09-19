@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MakeViewController.(mediaPicker(MPMediaPickerController, didPickMediaItems : MPMediaItemCollection) -&gt; ()).(closure #1):MakeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Double(bpm)!">
+            </PersistentString>
+            <PersistentString
+               value = "60 / Double(bpm)! * 13">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1):MakeViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MakeViewController.updateSongInformationUI(mediaItem : MPMediaItem) -&gt; ():MakeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Int(round(mediaItem.playbackDuration / tempoLength))">
+            </PersistentString>
+            <PersistentString
+               value = "sozaiAmount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MakeViewController.movieBtn(Any) -&gt; ():MakeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sozaiAmount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

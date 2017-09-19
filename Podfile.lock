@@ -1,0 +1,31 @@
+PODS:
+  - Font-Awesome-Swift (1.6.4)
+  - LTMorphingLabel (0.5.3)
+  - QBImagePickerController (3.4.0)
+  - Spring (1.0.3)
+
+DEPENDENCIES:
+  - Font-Awesome-Swift (~> 1.6.4)
+  - LTMorphingLabel
+  - QBImagePickerController
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
+
+EXTERNAL SOURCES:
+  Spring:
+    :branch: swift3
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: 8201b5c93bd7ebdf4cd18160bcde1e6e88c2be64
+    :git: https://github.com/MengTo/Spring.git
+
+SPEC CHECKSUMS:
+  Font-Awesome-Swift: 86c5ec8d1e251b834fb2b2e34cdcb1f480ade751
+  LTMorphingLabel: b85b6c1c5d0c4203e22f8d3dca722546f67b8410
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
+
+PODFILE CHECKSUM: 721cb12541647e6dd8925af48d642bfe5dc0bb3b
+
+COCOAPODS: 1.2.1

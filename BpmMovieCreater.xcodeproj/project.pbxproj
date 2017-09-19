@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		395D67141F6C83FB00CE77EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D67131F6C83FB00CE77EC /* AppDelegate.swift */; };
+		395D67161F6C83FB00CE77EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D67151F6C83FB00CE77EC /* ViewController.swift */; };
+		395D67191F6C83FB00CE77EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 395D67171F6C83FB00CE77EC /* Main.storyboard */; };
+		395D671B1F6C83FB00CE77EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 395D671A1F6C83FB00CE77EC /* Assets.xcassets */; };
+		395D671E1F6C83FB00CE77EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 395D671C1F6C83FB00CE77EC /* LaunchScreen.storyboard */; };
+		395D67261F6C84E600CE77EC /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 395D67251F6C84E600CE77EC /* Podfile */; };
+		395D672A1F6C8ADD00CE77EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D67291F6C8ADD00CE77EC /* TabBarController.swift */; };
+		395D672E1F6C8F6B00CE77EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D672D1F6C8F6B00CE77EC /* SettingViewController.swift */; };
+		395D67301F6C8F7900CE77EC /* KirokuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D672F1F6C8F7900CE77EC /* KirokuViewController.swift */; };
+		395D67321F6C8F9000CE77EC /* MakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D67311F6C8F9000CE77EC /* MakeViewController.swift */; };
+		395D67341F6C8F9F00CE77EC /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D67331F6C8F9F00CE77EC /* HowToViewController.swift */; };
+		396F27C11F6DD6BF00AD6ABB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396F27C01F6DD6BF00AD6ABB /* CoreMedia.framework */; };
+		396F27C31F6DD6CF00AD6ABB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396F27C21F6DD6CF00AD6ABB /* AVFoundation.framework */; };
+		396F27DC1F6DDA6200AD6ABB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396F27DB1F6DDA6200AD6ABB /* AudioToolbox.framework */; };
+		396F27F51F6DDCD900AD6ABB /* BMPAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F27ED1F6DDCD900AD6ABB /* BMPAnalyzer.swift */; };
+		396F27F61F6DDCD900AD6ABB /* libSuperpoweredAudioIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 396F27F01F6DDCD900AD6ABB /* libSuperpoweredAudioIOS.a */; };
+		396F27F71F6DDCD900AD6ABB /* Superpowered.mm in Sources */ = {isa = PBXBuildFile; fileRef = 396F27F11F6DDCD900AD6ABB /* Superpowered.mm */; };
+		487CEB2A87907406098F0098 /* Pods_BpmMovieCreater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 716D53709DA26F5675CBADB4 /* Pods_BpmMovieCreater.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		077B0229DF904D0E57515A35 /* Pods-BpmMovieCreater.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BpmMovieCreater.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BpmMovieCreater/Pods-BpmMovieCreater.debug.xcconfig"; sourceTree = "<group>"; };
+		395D67101F6C83FB00CE77EC /* BpmMovieCreater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BpmMovieCreater.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		395D67131F6C83FB00CE77EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		395D67151F6C83FB00CE77EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		395D67181F6C83FB00CE77EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		395D671A1F6C83FB00CE77EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		395D671D1F6C83FB00CE77EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		395D671F1F6C83FB00CE77EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		395D67251F6C84E600CE77EC /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		395D67291F6C8ADD00CE77EC /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		395D672D1F6C8F6B00CE77EC /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		395D672F1F6C8F7900CE77EC /* KirokuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KirokuViewController.swift; sourceTree = "<group>"; };
+		395D67311F6C8F9000CE77EC /* MakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeViewController.swift; sourceTree = "<group>"; };
+		395D67331F6C8F9F00CE77EC /* HowToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
+		396F27C01F6DD6BF00AD6ABB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		396F27C21F6DD6CF00AD6ABB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		396F27C41F6DD6E500AD6ABB /* BpmMovieCreater */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BpmMovieCreater; sourceTree = "<group>"; };
+		396F27DB1F6DDA6200AD6ABB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		396F27ED1F6DDCD900AD6ABB /* BMPAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMPAnalyzer.swift; sourceTree = "<group>"; };
+		396F27EF1F6DDCD900AD6ABB /* BPMAnalyzer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BPMAnalyzer-Bridging-Header.h"; sourceTree = "<group>"; };
+		396F27F01F6DDCD900AD6ABB /* libSuperpoweredAudioIOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSuperpoweredAudioIOS.a; sourceTree = "<group>"; };
+		396F27F11F6DDCD900AD6ABB /* Superpowered.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Superpowered.mm; sourceTree = "<group>"; };
+		396F27F21F6DDCD900AD6ABB /* SuperpoweredAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperpoweredAnalyzer.h; sourceTree = "<group>"; };
+		396F27F31F6DDCD900AD6ABB /* SuperpoweredDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperpoweredDecoder.h; sourceTree = "<group>"; };
+		396F27F41F6DDCD900AD6ABB /* SuperpoweredSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperpoweredSimple.h; sourceTree = "<group>"; };
+		396F27F81F6DDEB600AD6ABB /* BpmMovieCreater-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BpmMovieCreater-Bridging-Header.h"; sourceTree = "<group>"; };
+		716D53709DA26F5675CBADB4 /* Pods_BpmMovieCreater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BpmMovieCreater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B65BB15CA23596BD1FA6DF23 /* Pods-BpmMovieCreater.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BpmMovieCreater.release.xcconfig"; path = "Pods/Target Support Files/Pods-BpmMovieCreater/Pods-BpmMovieCreater.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		395D670D1F6C83FB00CE77EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				396F27DC1F6DDA6200AD6ABB /* AudioToolbox.framework in Frameworks */,
+				396F27C31F6DD6CF00AD6ABB /* AVFoundation.framework in Frameworks */,
+				396F27C11F6DD6BF00AD6ABB /* CoreMedia.framework in Frameworks */,
+				396F27F61F6DDCD900AD6ABB /* libSuperpoweredAudioIOS.a in Frameworks */,
+				487CEB2A87907406098F0098 /* Pods_BpmMovieCreater.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		395D67071F6C83FB00CE77EC = {
+			isa = PBXGroup;
+			children = (
+				395D67121F6C83FB00CE77EC /* BpmMovieCreater */,
+				395D67111F6C83FB00CE77EC /* Products */,
+				395D67251F6C84E600CE77EC /* Podfile */,
+				D5EB285AC107B75913D67827 /* Pods */,
+				5E54DD4F7C78B382217926BD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		395D67111F6C83FB00CE77EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				395D67101F6C83FB00CE77EC /* BpmMovieCreater.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		395D67121F6C83FB00CE77EC /* BpmMovieCreater */ = {
+			isa = PBXGroup;
+			children = (
+				396F27EC1F6DDCD900AD6ABB /* src */,
+				395D67131F6C83FB00CE77EC /* AppDelegate.swift */,
+				395D67151F6C83FB00CE77EC /* ViewController.swift */,
+				395D67171F6C83FB00CE77EC /* Main.storyboard */,
+				395D67331F6C8F9F00CE77EC /* HowToViewController.swift */,
+				395D672F1F6C8F7900CE77EC /* KirokuViewController.swift */,
+				395D672D1F6C8F6B00CE77EC /* SettingViewController.swift */,
+				395D671A1F6C83FB00CE77EC /* Assets.xcassets */,
+				395D67311F6C8F9000CE77EC /* MakeViewController.swift */,
+				395D671C1F6C83FB00CE77EC /* LaunchScreen.storyboard */,
+				395D671F1F6C83FB00CE77EC /* Info.plist */,
+				395D67291F6C8ADD00CE77EC /* TabBarController.swift */,
+				396F27F81F6DDEB600AD6ABB /* BpmMovieCreater-Bridging-Header.h */,
+			);
+			path = BpmMovieCreater;
+			sourceTree = "<group>";
+		};
+		396F27EC1F6DDCD900AD6ABB /* src */ = {
+			isa = PBXGroup;
+			children = (
+				396F27ED1F6DDCD900AD6ABB /* BMPAnalyzer.swift */,
+				396F27EE1F6DDCD900AD6ABB /* Superpower */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		396F27EE1F6DDCD900AD6ABB /* Superpower */ = {
+			isa = PBXGroup;
+			children = (
+				396F27EF1F6DDCD900AD6ABB /* BPMAnalyzer-Bridging-Header.h */,
+				396F27F01F6DDCD900AD6ABB /* libSuperpoweredAudioIOS.a */,
+				396F27F11F6DDCD900AD6ABB /* Superpowered.mm */,
+				396F27F21F6DDCD900AD6ABB /* SuperpoweredAnalyzer.h */,
+				396F27F31F6DDCD900AD6ABB /* SuperpoweredDecoder.h */,
+				396F27F41F6DDCD900AD6ABB /* SuperpoweredSimple.h */,
+			);
+			path = Superpower;
+			sourceTree = "<group>";
+		};
+		5E54DD4F7C78B382217926BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				396F27DB1F6DDA6200AD6ABB /* AudioToolbox.framework */,
+				396F27C41F6DD6E500AD6ABB /* BpmMovieCreater */,
+				396F27C21F6DD6CF00AD6ABB /* AVFoundation.framework */,
+				396F27C01F6DD6BF00AD6ABB /* CoreMedia.framework */,
+				716D53709DA26F5675CBADB4 /* Pods_BpmMovieCreater.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5EB285AC107B75913D67827 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				077B0229DF904D0E57515A35 /* Pods-BpmMovieCreater.debug.xcconfig */,
+				B65BB15CA23596BD1FA6DF23 /* Pods-BpmMovieCreater.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		395D670F1F6C83FB00CE77EC /* BpmMovieCreater */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 395D67221F6C83FB00CE77EC /* Build configuration list for PBXNativeTarget "BpmMovieCreater" */;
+			buildPhases = (
+				53338CA8189C0ECED78A51BD /* [CP] Check Pods Manifest.lock */,
+				395D670C1F6C83FB00CE77EC /* Sources */,
+				395D670D1F6C83FB00CE77EC /* Frameworks */,
+				395D670E1F6C83FB00CE77EC /* Resources */,
+				0E864B24630A1BFFBC3BA4F7 /* [CP] Embed Pods Frameworks */,
+				7DB556DA0648521A5434AE39 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BpmMovieCreater;
+			productName = BpmMovieCreater;
+			productReference = 395D67101F6C83FB00CE77EC /* BpmMovieCreater.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		395D67081F6C83FB00CE77EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "なおや";
+				TargetAttributes = {
+					395D670F1F6C83FB00CE77EC = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = QVG2R749DZ;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 395D670B1F6C83FB00CE77EC /* Build configuration list for PBXProject "BpmMovieCreater" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 395D67071F6C83FB00CE77EC;
+			productRefGroup = 395D67111F6C83FB00CE77EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				395D670F1F6C83FB00CE77EC /* BpmMovieCreater */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		395D670E1F6C83FB00CE77EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				395D671E1F6C83FB00CE77EC /* LaunchScreen.storyboard in Resources */,
+				395D671B1F6C83FB00CE77EC /* Assets.xcassets in Resources */,
+				395D67261F6C84E600CE77EC /* Podfile in Resources */,
+				395D67191F6C83FB00CE77EC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E864B24630A1BFFBC3BA4F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BpmMovieCreater/Pods-BpmMovieCreater-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53338CA8189C0ECED78A51BD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7DB556DA0648521A5434AE39 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BpmMovieCreater/Pods-BpmMovieCreater-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		395D670C1F6C83FB00CE77EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				395D67301F6C8F7900CE77EC /* KirokuViewController.swift in Sources */,
+				396F27F51F6DDCD900AD6ABB /* BMPAnalyzer.swift in Sources */,
+				395D672A1F6C8ADD00CE77EC /* TabBarController.swift in Sources */,
+				396F27F71F6DDCD900AD6ABB /* Superpowered.mm in Sources */,
+				395D67161F6C83FB00CE77EC /* ViewController.swift in Sources */,
+				395D67141F6C83FB00CE77EC /* AppDelegate.swift in Sources */,
+				395D67321F6C8F9000CE77EC /* MakeViewController.swift in Sources */,
+				395D67341F6C8F9F00CE77EC /* HowToViewController.swift in Sources */,
+				395D672E1F6C8F6B00CE77EC /* SettingViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		395D67171F6C83FB00CE77EC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				395D67181F6C83FB00CE77EC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		395D671C1F6C83FB00CE77EC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				395D671D1F6C83FB00CE77EC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		395D67201F6C83FB00CE77EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		395D67211F6C83FB00CE77EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		395D67231F6C83FB00CE77EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 077B0229DF904D0E57515A35 /* Pods-BpmMovieCreater.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = QVG2R749DZ;
+				INFOPLIST_FILE = BpmMovieCreater/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BpmMovieCreater/src/Superpower",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = shop.kiroku.BpmMovieCreater;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BpmMovieCreater/BpmMovieCreater-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		395D67241F6C83FB00CE77EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B65BB15CA23596BD1FA6DF23 /* Pods-BpmMovieCreater.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = QVG2R749DZ;
+				INFOPLIST_FILE = BpmMovieCreater/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BpmMovieCreater/src/Superpower",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = shop.kiroku.BpmMovieCreater;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BpmMovieCreater/BpmMovieCreater-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		395D670B1F6C83FB00CE77EC /* Build configuration list for PBXProject "BpmMovieCreater" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				395D67201F6C83FB00CE77EC /* Debug */,
+				395D67211F6C83FB00CE77EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		395D67221F6C83FB00CE77EC /* Build configuration list for PBXNativeTarget "BpmMovieCreater" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				395D67231F6C83FB00CE77EC /* Debug */,
+				395D67241F6C83FB00CE77EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 395D67081F6C83FB00CE77EC /* Project object */;
+}
