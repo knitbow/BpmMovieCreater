@@ -18,6 +18,9 @@
 		395D67301F6C8F7900CE77EC /* KirokuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D672F1F6C8F7900CE77EC /* KirokuViewController.swift */; };
 		395D67321F6C8F9000CE77EC /* MakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D67311F6C8F9000CE77EC /* MakeViewController.swift */; };
 		395D67341F6C8F9F00CE77EC /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D67331F6C8F9F00CE77EC /* HowToViewController.swift */; };
+		396220E51F730FA60023CADA /* MovieCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396220E41F730FA60023CADA /* MovieCreator.swift */; };
+		396221151F7316BA0023CADA /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396221101F7316600023CADA /* GPUImage.framework */; };
+		396221161F7316BA0023CADA /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 396221101F7316600023CADA /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		396F27C11F6DD6BF00AD6ABB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396F27C01F6DD6BF00AD6ABB /* CoreMedia.framework */; };
 		396F27C31F6DD6CF00AD6ABB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396F27C21F6DD6CF00AD6ABB /* AVFoundation.framework */; };
 		396F27DC1F6DDA6200AD6ABB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396F27DB1F6DDA6200AD6ABB /* AudioToolbox.framework */; };
@@ -26,6 +29,65 @@
 		396F27F71F6DDCD900AD6ABB /* Superpowered.mm in Sources */ = {isa = PBXBuildFile; fileRef = 396F27F11F6DDCD900AD6ABB /* Superpowered.mm */; };
 		487CEB2A87907406098F0098 /* Pods_BpmMovieCreater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 716D53709DA26F5675CBADB4 /* Pods_BpmMovieCreater.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3962210B1F7316600023CADA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 396221041F7316600023CADA /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC6E7CAB1C39A9D8006DF678;
+			remoteInfo = GPUImage_macOS;
+		};
+		3962210D1F7316600023CADA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 396221041F7316600023CADA /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC6E7CB51C39A9D8006DF678;
+			remoteInfo = GPUImageTests_macOS;
+		};
+		3962210F1F7316600023CADA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 396221041F7316600023CADA /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC9E34E91E524A2200B8604F;
+			remoteInfo = GPUImage_iOS;
+		};
+		396221111F7316600023CADA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 396221041F7316600023CADA /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC9E34F11E524A2200B8604F;
+			remoteInfo = GPUImageTests_iOS;
+		};
+		396221131F73169C0023CADA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 396221041F7316600023CADA /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC9E34E81E524A2200B8604F;
+			remoteInfo = GPUImage_iOS;
+		};
+		396221171F7316BA0023CADA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 396221041F7316600023CADA /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC9E34E81E524A2200B8604F;
+			remoteInfo = GPUImage_iOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		396221191F7316BA0023CADA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				396221161F7316BA0023CADA /* GPUImage.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		077B0229DF904D0E57515A35 /* Pods-BpmMovieCreater.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BpmMovieCreater.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BpmMovieCreater/Pods-BpmMovieCreater.debug.xcconfig"; sourceTree = "<group>"; };
@@ -42,6 +104,8 @@
 		395D672F1F6C8F7900CE77EC /* KirokuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KirokuViewController.swift; sourceTree = "<group>"; };
 		395D67311F6C8F9000CE77EC /* MakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeViewController.swift; sourceTree = "<group>"; };
 		395D67331F6C8F9F00CE77EC /* HowToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
+		396220E41F730FA60023CADA /* MovieCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCreator.swift; sourceTree = "<group>"; };
+		396221041F7316600023CADA /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = "../../../../Downloads/GPUImage2-master-2/framework/GPUImage.xcodeproj"; sourceTree = "<group>"; };
 		396F27C01F6DD6BF00AD6ABB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		396F27C21F6DD6CF00AD6ABB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		396F27C41F6DD6E500AD6ABB /* BpmMovieCreater */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BpmMovieCreater; sourceTree = "<group>"; };
@@ -68,6 +132,7 @@
 				396F27C11F6DD6BF00AD6ABB /* CoreMedia.framework in Frameworks */,
 				396F27F61F6DDCD900AD6ABB /* libSuperpoweredAudioIOS.a in Frameworks */,
 				487CEB2A87907406098F0098 /* Pods_BpmMovieCreater.framework in Frameworks */,
+				396221151F7316BA0023CADA /* GPUImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,9 +161,11 @@
 		395D67121F6C83FB00CE77EC /* BpmMovieCreater */ = {
 			isa = PBXGroup;
 			children = (
+				396221041F7316600023CADA /* GPUImage.xcodeproj */,
 				396F27EC1F6DDCD900AD6ABB /* src */,
 				395D67131F6C83FB00CE77EC /* AppDelegate.swift */,
 				395D67151F6C83FB00CE77EC /* ViewController.swift */,
+				396220E41F730FA60023CADA /* MovieCreator.swift */,
 				395D67171F6C83FB00CE77EC /* Main.storyboard */,
 				395D67331F6C8F9F00CE77EC /* HowToViewController.swift */,
 				395D672F1F6C8F7900CE77EC /* KirokuViewController.swift */,
@@ -111,6 +178,17 @@
 				396F27F81F6DDEB600AD6ABB /* BpmMovieCreater-Bridging-Header.h */,
 			);
 			path = BpmMovieCreater;
+			sourceTree = "<group>";
+		};
+		396221051F7316600023CADA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3962210C1F7316600023CADA /* GPUImage.framework */,
+				3962210E1F7316600023CADA /* GPUImageTests_macOS.xctest */,
+				396221101F7316600023CADA /* GPUImage.framework */,
+				396221121F7316600023CADA /* GPUImageTests_iOS.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		396F27EC1F6DDCD900AD6ABB /* src */ = {
@@ -169,10 +247,13 @@
 				395D670E1F6C83FB00CE77EC /* Resources */,
 				0E864B24630A1BFFBC3BA4F7 /* [CP] Embed Pods Frameworks */,
 				7DB556DA0648521A5434AE39 /* [CP] Copy Pods Resources */,
+				396221191F7316BA0023CADA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				396221141F73169C0023CADA /* PBXTargetDependency */,
+				396221181F7316BA0023CADA /* PBXTargetDependency */,
 			);
 			name = BpmMovieCreater;
 			productName = BpmMovieCreater;
@@ -208,12 +289,49 @@
 			mainGroup = 395D67071F6C83FB00CE77EC;
 			productRefGroup = 395D67111F6C83FB00CE77EC /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 396221051F7316600023CADA /* Products */;
+					ProjectRef = 396221041F7316600023CADA /* GPUImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				395D670F1F6C83FB00CE77EC /* BpmMovieCreater */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3962210C1F7316600023CADA /* GPUImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GPUImage.framework;
+			remoteRef = 3962210B1F7316600023CADA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3962210E1F7316600023CADA /* GPUImageTests_macOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GPUImageTests_macOS.xctest;
+			remoteRef = 3962210D1F7316600023CADA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		396221101F7316600023CADA /* GPUImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GPUImage.framework;
+			remoteRef = 3962210F1F7316600023CADA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		396221121F7316600023CADA /* GPUImageTests_iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GPUImageTests_iOS.xctest;
+			remoteRef = 396221111F7316600023CADA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		395D670E1F6C83FB00CE77EC /* Resources */ = {
@@ -287,6 +405,7 @@
 				395D672A1F6C8ADD00CE77EC /* TabBarController.swift in Sources */,
 				396F27F71F6DDCD900AD6ABB /* Superpowered.mm in Sources */,
 				395D67161F6C83FB00CE77EC /* ViewController.swift in Sources */,
+				396220E51F730FA60023CADA /* MovieCreator.swift in Sources */,
 				395D67141F6C83FB00CE77EC /* AppDelegate.swift in Sources */,
 				395D67321F6C8F9000CE77EC /* MakeViewController.swift in Sources */,
 				395D67341F6C8F9F00CE77EC /* HowToViewController.swift in Sources */,
@@ -295,6 +414,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		396221141F73169C0023CADA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage_iOS;
+			targetProxy = 396221131F73169C0023CADA /* PBXContainerItemProxy */;
+		};
+		396221181F7316BA0023CADA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage_iOS;
+			targetProxy = 396221171F7316BA0023CADA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		395D67171F6C83FB00CE77EC /* Main.storyboard */ = {
@@ -415,6 +547,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 077B0229DF904D0E57515A35 /* Pods-BpmMovieCreater.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = QVG2R749DZ;
@@ -436,6 +569,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B65BB15CA23596BD1FA6DF23 /* Pods-BpmMovieCreater.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = QVG2R749DZ;
