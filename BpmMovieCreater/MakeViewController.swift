@@ -23,7 +23,8 @@ class MakeViewController: UIViewController {
   @IBOutlet weak var songLabel: UILabel!
   // 曲の長さ
   @IBOutlet weak var lengthLabel: UILabel!
-  
+  // プレイヤー用のproperty
+  var audioPlayer:AVAudioPlayer?
   // メディアピッカー
   let mediaPicker: MPMediaPickerController = MPMediaPickerController(mediaTypes: .music)
   // プレイヤー
@@ -32,6 +33,8 @@ class MakeViewController: UIViewController {
   var tempoLength = Double()
   // 素材枚数
   var sozaiAmount = Int()
+  // 写真配列
+  var imageArray: [UIImage] = [UIImage]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -77,61 +80,64 @@ class MakeViewController: UIViewController {
     
     var i = 0
     assets.enumerateObjects({ obj, idx, stop in
-      
-      if(i == self.sozaiAmount){
-        return
-      }
-      
-      let asset:PHAsset = obj as PHAsset;
-      let requestOptions = PHImageRequestOptions()
-      requestOptions.resizeMode = .exact
-      requestOptions.deliveryMode = .highQualityFormat
-      
-      // this one is key
-      requestOptions.isSynchronous = true
-      
-      // imageを取得
-      var imageArray: [UIImage] = [UIImage]()
-      var filterImage = UIImage()
-      PHImageManager.default().requestImage(for: asset as! PHAsset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (pickedImage, info) in
+      autoreleasepool {
+        if(i == self.sozaiAmount){
+          return
+        }
         
-        // フィルター定義
-        let toonFilter = MonochromeFilter()
-        filterImage = pickedImage!.filterWithOperation(toonFilter)
-        imageArray.append(filterImage)
-      })
-      
-      i = i + 1
+        let asset:PHAsset = obj as PHAsset;
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.resizeMode = .exact
+        requestOptions.deliveryMode = .highQualityFormat
+        
+        // this one is key
+        requestOptions.isSynchronous = true
+        
+        // imageを取得
+        var filterImage = UIImage()
+        PHImageManager.default().requestImage(for: asset , targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (pickedImage, info) in
+          
+          // フィルター定義
+          let toonFilter = MonochromeFilter()
+          filterImage = pickedImage!.filterWithOperation(toonFilter)
+          self.imageArray.append(filterImage)
+        })
+        
+        i = i + 1
+      }
     });
-//    kokokara
-//    // TODO 取得した画像をスライドショーにする
-//    let movie = MovieCreator()
-//    
-//    // TODO 画像の解像度を写真によって変更させる
-//    let movieSize = CGSize(width: 1920, height:1280)
-//    //    let movieSize = PHImageManagerMaximumSize
-//    
-//    let time = 100
-//    
-//    // 選択した写真や動画を全て5秒に設定して、mp4ファイルに変換する
+
+    // TODO 取得した画像をスライドショーにする
+    let movie = MovieCreator()
+    
+    // TODO 画像の解像度を写真によって変更させる
+    let movieSize = CGSize(width: 1920, height:1280)
+    //    let movieSize = PHImageManagerMaximumSize
+    
+    // TODO テンポがずれている
+    let time = tempoLength * 100
+    
+    let movieURL = movie.create(images: self.imageArray, size: movieSize, time: Int(time))
+    
+//   // 選択した写真や動画を全て5秒に設定して、mp4ファイルに変換する
 //    let movieURL = self.mergeMovie(firstMoviePathUrl: urlArray[0] as NSURL, secondMoviePathUrl: urlArray[1] as NSURL)
-//    
-//    // 音声と動画のマージ
-//    let goodMovieURL = self.mergeAudio(audioURL: audioPlayer?.url! as! NSURL, moviePathUrl: movieURL as NSURL)
-//    
-//    // ライブラリへの保存
-//    var alertController = UIAlertController(title: "完了", message: "カメラロールに保存しました", preferredStyle: .actionSheet)
-//    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//    PHPhotoLibrary.shared().performChanges({
-//      PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: goodMovieURL)
-//    }) { completed, error in
-//      if !completed {
-//        alertController = UIAlertController(title: "失敗", message: "カメラロールの保存に失敗しました", preferredStyle: .actionSheet)
-//      }
-//    }
-//    dismiss(animated: true,completion: nil)
-//    alertController.addAction(defaultAction)
-//    present(alertController, animated: true, completion: nil)
+    
+    // 音声と動画のマージ
+    let goodMovieURL = self.mergeAudio(audioURL: audioPlayer?.url! as! NSURL, moviePathUrl: movieURL as NSURL)
+    
+    // ライブラリへの保存
+    var alertController = UIAlertController(title: "完了", message: "カメラロールに保存しました", preferredStyle: .actionSheet)
+    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+    PHPhotoLibrary.shared().performChanges({
+      PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: goodMovieURL)
+    }) { completed, error in
+      if !completed {
+        alertController = UIAlertController(title: "失敗", message: "カメラロールの保存に失敗しました", preferredStyle: .actionSheet)
+      }
+    }
+    dismiss(animated: true,completion: nil)
+    alertController.addAction(defaultAction)
+    present(alertController, animated: true, completion: nil)
   }
   
   // 動画と動画のマージ
@@ -354,10 +360,20 @@ extension MakeViewController: MPMediaPickerControllerDelegate {
     // 選択した曲情報がmediaItemCollectionに入っているので、これをplayerにセット。
     player.setQueue(with: mediaItemCollection)
     
-    updateSongInformationUI(mediaItem: mediaItemCollection.representativeItem!)
-    
     guard let asset = mediaItemCollection.items.first,
       let url = asset.assetURL else {return}
+    
+    // audioPlayerを作成
+    do {
+      // itemのassetURLからプレイヤーを作成する
+      audioPlayer = try AVAudioPlayer(contentsOf: url)
+    } catch  {
+      // エラー発生してプレイヤー作成失敗
+      audioPlayer = nil
+      // 戻る
+      return
+    }
+
     // BPM取得処理
     _ = BPMAnalyzer.core.getBpmFrom(url, completion: {[weak self] (bpm) in
       self?.bpmLabel.text = bpm
@@ -404,9 +420,13 @@ extension MakeViewController: MPMediaPickerControllerDelegate {
       self?.bpmLabel.numberOfLines = 2
       self?.bpmLabel.text = "BPM：" + bpm + "¥nテンポ秒数：" + String(describing: self?.tempoLength)
       self?.bpmLabel.sizeToFit()
-      
+
       self?.mediaPicker.dismiss(animated: true, completion: nil)
     })
+
+    // 音楽情報取得
+    updateSongInformationUI(mediaItem: mediaItemCollection.representativeItem!)
+    
   }
   
   //選択がキャンセルされた場合に呼ばれる
@@ -417,7 +437,7 @@ extension MakeViewController: MPMediaPickerControllerDelegate {
   
   /// 曲情報を表示する
   func updateSongInformationUI(mediaItem: MPMediaItem) {
-    
+
     // 曲情報表示
     // (a ?? b は、a != nil ? a! : b を示す演算子です)
     // (aがnilの場合にはbとなります)
@@ -431,7 +451,7 @@ extension MakeViewController: MPMediaPickerControllerDelegate {
     guard !((mediaItem.playbackDuration / tempoLength).isNaN || (mediaItem.playbackDuration / tempoLength).isInfinite) else {
       return // or do some error handling
     }
-    sozaiAmount = Int(round(mediaItem.playbackDuration / tempoLength))
+    self.sozaiAmount = Int(round(mediaItem.playbackDuration / tempoLength))
     
     // アートワーク表示
     if let artwork = mediaItem.artwork {

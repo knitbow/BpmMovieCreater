@@ -2,4 +2,118 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BpmMovieCreater/MakeViewController.swift"
+            timestampString = "527725406.784786"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "movieBtn(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BpmMovieCreater.MakeViewController.movieBtn (Any) -&gt; ()"
+                  moduleName = "BpmMovieCreater"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/naoya/Desktop/MyApps/BpmMovieCreater/BpmMovieCreater/MakeViewController.swift"
+                  timestampString = "527725757.06966"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "1784">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BpmMovieCreater.MakeViewController.movieBtn (Any) -&gt; ()"
+                  moduleName = "BpmMovieCreater"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/naoya/Desktop/MyApps/BpmMovieCreater/BpmMovieCreater/MakeViewController.swift"
+                  timestampString = "527725757.076085"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "5032">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BpmMovieCreater/MakeViewController.swift"
+            timestampString = "527725409.283492"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "movieBtn(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BpmMovieCreater.MakeViewController.movieBtn (Any) -&gt; ()"
+                  moduleName = "BpmMovieCreater"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/naoya/Desktop/MyApps/BpmMovieCreater/BpmMovieCreater/MakeViewController.swift"
+                  timestampString = "527725757.088844"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "2464">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BpmMovieCreater.MakeViewController.(movieBtn (Any) -&gt; ()).(closure #3)"
+                  moduleName = "BpmMovieCreater"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/naoya/Desktop/MyApps/BpmMovieCreater/BpmMovieCreater/MakeViewController.swift"
+                  timestampString = "527725757.094277"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BpmMovieCreater/MakeViewController.swift"
+            timestampString = "527725460.370024"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "movieBtn(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -3,6 +3,9 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1):MakeViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "MakeViewController.(mediaPicker(MPMediaPickerController, didPickMediaItems : MPMediaItemCollection) -&gt; ()).(closure #1):MakeViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -12,9 +15,6 @@
                value = "60 / Double(bpm)! * 13">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1):MakeViewController.swift">
       </ContextState>
       <ContextState
          contextName = "MakeViewController.updateSongInformationUI(mediaItem : MPMediaItem) -&gt; ():MakeViewController.swift">
@@ -30,6 +30,12 @@
       <ContextState
          contextName = "MakeViewController.movieBtn(Any) -&gt; ():MakeViewController.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "audioPlayer?.url! as! NSURL">
+            </PersistentString>
+            <PersistentString
+               value = "imageArray">
+            </PersistentString>
             <PersistentString
                value = "sozaiAmount">
             </PersistentString>
