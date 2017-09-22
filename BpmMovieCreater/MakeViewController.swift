@@ -13,6 +13,11 @@ import GPUImage
 
 class MakeViewController: UIViewController {
   
+  let movieCreator = MovieCreator()
+  var compMovieURL = URL(string:"")
+  let queue = DispatchQueue.main
+  
+  
   // Bpm
   @IBOutlet weak var bpmLabel: UILabel!
   // ジャケット画像
@@ -35,6 +40,8 @@ class MakeViewController: UIViewController {
   var sozaiAmount = Int()
   // 写真配列
   var imageArray: [UIImage] = [UIImage]()
+  //１枚めの画像かどうか
+  var isFirstTap = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -67,11 +74,14 @@ class MakeViewController: UIViewController {
   
   // movieボタン押下
   @IBAction func movieBtn(_ sender: Any) {
+    
+    self.movieCreator.time = Int(60 * tempoLength)
+    
     //全てのカメラロールの画像を取得する。
     let fetchOptions = PHFetchOptions();
     
     var date:NSDate = NSDate();
-    date = NSDate(timeIntervalSinceNow: -30*24*60*60);//1 month ago
+    date = NSDate(timeIntervalSinceNow: -60*24*60*60);//1 month ago
     
     fetchOptions.predicate = NSPredicate(format: "creationDate > %@", date);
     fetchOptions.sortDescriptors =  [NSSortDescriptor(key: "creationDate", ascending: false)];
@@ -98,46 +108,43 @@ class MakeViewController: UIViewController {
         PHImageManager.default().requestImage(for: asset , targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (pickedImage, info) in
           
           // フィルター定義
-          let toonFilter = MonochromeFilter()
+          let toonFilter = LuminanceRangeReduction()
           filterImage = pickedImage!.filterWithOperation(toonFilter)
           self.imageArray.append(filterImage)
         })
         
+        //１枚目の画像だけセットアップを含む
+        if self.isFirstTap {
+          self.movieCreator.createFirst(image: filterImage, size: CGSize(width:1920,
+                                                              height:1080))
+          self.isFirstTap = false
+        }else{
+          self.movieCreator.createSecond(image: filterImage)
+        }
         i = i + 1
       }
     });
-
-    // TODO 取得した画像をスライドショーにする
-    let movie = MovieCreator()
-    
-    // TODO 画像の解像度を写真によって変更させる
-    let movieSize = CGSize(width: 1920, height:1280)
-    //    let movieSize = PHImageManagerMaximumSize
-    
-    // TODO テンポがずれている
-    let time = tempoLength * 100
-    
-    let movieURL = movie.create(images: self.imageArray, size: movieSize, time: Int(time))
-    
-//   // 選択した写真や動画を全て5秒に設定して、mp4ファイルに変換する
-//    let movieURL = self.mergeMovie(firstMoviePathUrl: urlArray[0] as NSURL, secondMoviePathUrl: urlArray[1] as NSURL)
-    
-    // 音声と動画のマージ
-    let goodMovieURL = self.mergeAudio(audioURL: audioPlayer?.url! as! NSURL, moviePathUrl: movieURL as NSURL)
     
     // ライブラリへの保存
-    var alertController = UIAlertController(title: "完了", message: "カメラロールに保存しました", preferredStyle: .actionSheet)
-    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-    PHPhotoLibrary.shared().performChanges({
-      PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: goodMovieURL)
-    }) { completed, error in
-      if !completed {
-        alertController = UIAlertController(title: "失敗", message: "カメラロールの保存に失敗しました", preferredStyle: .actionSheet)
-      }
+    var movieURL = URL(string:"")
+    let semaphore = DispatchSemaphore(value: 0)
+    self.movieCreator.finished { (url) in
+      movieURL = url
+      semaphore.signal()
     }
+    semaphore.wait()
+
+    // 音声と動画のマージ
+    self.mergeAudio(audioURL: self.audioPlayer!.url! as NSURL, moviePathUrl: movieURL! as NSURL) { (url) in
+      self.compMovieURL = url
+    }
+
+    let alertController = UIAlertController(title: "完了", message: "カメラロールに保存しました", preferredStyle: .actionSheet)
+    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     dismiss(animated: true,completion: nil)
     alertController.addAction(defaultAction)
     present(alertController, animated: true, completion: nil)
+
   }
   
   // 動画と動画のマージ
@@ -247,7 +254,7 @@ class MakeViewController: UIViewController {
   }
   
   // 音声と動画をマージする
-  func mergeAudio(audioURL: NSURL, moviePathUrl: NSURL) -> URL {
+  func mergeAudio(audioURL: NSURL, moviePathUrl: NSURL, _ completion:@escaping (URL)->()){
     
     // Compositionを生成
     let mutableComposition = AVMutableComposition()
@@ -335,6 +342,18 @@ class MakeViewController: UIViewController {
       switch assetExportSession.status {
       case .completed:
         print("Crop Success! Url -> \(composedMovieUrl)")
+        DispatchQueue.main.async(execute: {
+          PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL:composedMovieUrl as URL)
+          }, completionHandler: { (success, err) in
+            if success == true {
+              print("保存成功！")
+            } else {
+              print("保存失敗！ \(String(describing: err)) \(String(describing: err?.localizedDescription))")
+            }
+          })
+        })
+        
       case .failed, .cancelled:
         print("error = \(String(describing: assetExportSession.error))")
       default:
@@ -342,7 +361,7 @@ class MakeViewController: UIViewController {
       }
     })
     
-    return composedMovieUrl as URL
+    completion(composedMovieUrl as URL)
     
   }
   

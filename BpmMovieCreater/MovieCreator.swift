@@ -1,31 +1,44 @@
 //
 //  MovieCreator.swift
-//  Kiroku
+//  Robin
 //
-//  Created by なおや on 2017/08/09.
-//  Copyright © 2017年 なおや. All rights reserved.
+//  Created by 久保　玲於奈 on 2017/02/27.
+//  Copyright © 2017年 uruly. All rights reserved.
 //
 
-import UIKit
-import Foundation
 import AVFoundation
-import GPUImage
+import UIKit
 
-class MovieCreator: NSObject {
+class MovieCreator {
   
-  override init() {
-    super.init()
-  }
+  //保存先のURL
+  var url:URL?
   
-  func create(images:[UIImage], size: CGSize, time:Int) -> URL {
+  //フレーム数
+  var frameCount = 0
+  
+  // FPS
+  let fps: __int32_t = 60
+  var time:Int = 60    // (time / fps)   VCからいじる
+  
+  var videoWriter:AVAssetWriter?
+  var writerInput:AVAssetWriterInput?
+  var adaptor:AVAssetWriterInputPixelBufferAdaptor!
+  
+  //適当に画像サイズ
+  let imageSize = CGSize(width:1280,height:960)
+  
+  
+  //イチバン最初はこれを呼び出す
+  func createFirst(image:UIImage,size:CGSize){
     
     //保存先のURL
-    let url = NSURL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(NSUUID().uuidString).mp4")
-    
+    url = NSURL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(NSUUID().uuidString).mp4")
     // AVAssetWriter
-    guard let videoWriter = try? AVAssetWriter(outputURL: url!, fileType: AVFileTypeQuickTimeMovie) else {
+    guard let firstVideoWriter = try? AVAssetWriter(outputURL: url!, fileType: AVFileTypeQuickTimeMovie) else {
       fatalError("AVAssetWriter error")
     }
+    videoWriter = firstVideoWriter
     
     //画像サイズを変える
     let width = size.width
@@ -37,23 +50,12 @@ class MovieCreator: NSObject {
       AVVideoWidthKey: width,
       AVVideoHeightKey: height
       ] as [String : Any]
-    let writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings as [String : AnyObject])
-    videoWriter.add(writerInput)
-    
-    let audioOutputSettings: Dictionary<String, AnyObject> = [
-      AVFormatIDKey : kAudioFormatMPEG4AAC as AnyObject,
-      AVNumberOfChannelsKey : 1 as AnyObject,
-      AVSampleRateKey : 44100.0 as AnyObject,
-      AVEncoderBitRateKey : 128000 as AnyObject
-    ]
-    let audioInput = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: audioOutputSettings)
-    audioInput.expectsMediaDataInRealTime = true
-    videoWriter.add(audioInput)
-    
+    writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings as [String : AnyObject])
+    videoWriter!.add(writerInput!)
     
     // AVAssetWriterInputPixelBufferAdaptor
-    let adaptor = AVAssetWriterInputPixelBufferAdaptor(
-      assetWriterInput: writerInput,
+    adaptor = AVAssetWriterInputPixelBufferAdaptor(
+      assetWriterInput: writerInput!,
       sourcePixelBufferAttributes: [
         kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32ARGB),
         kCVPixelBufferWidthKey as String: width,
@@ -61,71 +63,106 @@ class MovieCreator: NSObject {
         ]
     )
     
-    writerInput.expectsMediaDataInRealTime = true
+    writerInput?.expectsMediaDataInRealTime = true
     
     // 動画の生成開始
     
     // 生成できるか確認
-    if (!videoWriter.startWriting()) {
+    if (!videoWriter!.startWriting()) {
       // error
       print("error videoWriter startWriting")
     }
     
     // 動画生成開始
-    videoWriter.startSession(atSourceTime: kCMTimeZero)
+    videoWriter!.startSession(atSourceTime: kCMTimeZero)
     
     // pixel bufferを宣言
     var buffer: CVPixelBuffer? = nil
     
     // 現在のフレームカウント
-    var frameCount = 0
+    frameCount = 0
     
-    // 各画像の表示する時間
-    let durationForEachImage = time
-    
-    // FPS
-    let fps: __int32_t = 60
-    
-    // 全画像をbufferに埋め込む
-    for image in images {
-      
-      if (!adaptor.assetWriterInput.isReadyForMoreMediaData) {
-        break
-      }
-      
-      // 動画の時間を生成(その画像の表示する時間/開始時点と表示時間を渡す)
-      let frameTime: CMTime = CMTimeMake(Int64(__int32_t(frameCount) * __int32_t(durationForEachImage)), fps)
-      //時間経過を確認(確認用)
-      let second = CMTimeGetSeconds(frameTime)
-      print(second)
-      
-      let resize = resizeImage(image: image, contentSize: size)
-      // CGImageからBufferを生成
-      buffer = self.pixelBufferFromCGImage(cgImage: resize.cgImage!)
-      
-      // 生成したBufferを追加
-      if (!adaptor.append(buffer!, withPresentationTime: frameTime)) {
-        // Error!
-        print("adaptError")
-        print(videoWriter.error!)
-      }
-      
-      frameCount += 1
+    if (!adaptor.assetWriterInput.isReadyForMoreMediaData) {
+      return
     }
     
-    // 動画生成終了
-    writerInput.markAsFinished()
-    videoWriter.endSession(atSourceTime: CMTimeMake(Int64((__int32_t(frameCount)) *  __int32_t(durationForEachImage)), fps))
+    // 動画の時間を生成(その画像の表示する時間/開始時点と表示時間を渡す)
+    let frameTime: CMTime = CMTimeMake(Int64(__int32_t(frameCount) * __int32_t(time)), fps)
+    //時間経過を確認(確認用)
+    let second = CMTimeGetSeconds(frameTime)
+    print(second)
     
-    videoWriter.finishWriting(completionHandler: {
-      // Finish!
-      print("movie created.")
-      
-    })
+    //画像のリサイズと整形
+    let resize = resizeImage(image: image, contentSize: imageSize)
     
-    return url!
+    // CGImageからBufferを生成
+    buffer = self.pixelBufferFromCGImage(cgImage: resize.cgImage!)
+    
+    // 生成したBufferを追加
+    if (!adaptor.append(buffer!, withPresentationTime: frameTime)) {
+      // Error!
+      print("adaptError")
+      print(videoWriter!.error!)
+    }
+    
+    frameCount += 1
+    
   }
   
+  //２回め以降はこれを呼び出す
+  func createSecond(image:UIImage){
+    //videoWriterがなければ終了
+    if videoWriter == nil{
+      return
+    }
+    
+    // pixel bufferを宣言
+    var buffer: CVPixelBuffer? = nil
+    
+    if (!adaptor.assetWriterInput.isReadyForMoreMediaData) {
+      return
+    }
+    
+    // 動画の時間を生成(その画像の表示する時間/開始時点と表示時間を渡す)
+    let frameTime: CMTime = CMTimeMake(Int64(__int32_t(frameCount) * __int32_t(time)), fps)
+    //時間経過を確認(確認用)
+    let second = CMTimeGetSeconds(frameTime)
+    print(second)
+    
+    // CGImageからBufferを生成
+    let resize = resizeImage(image: image, contentSize: imageSize)
+    buffer = self.pixelBufferFromCGImage(cgImage: resize.cgImage!)
+    
+    // 生成したBufferを追加
+    if (!adaptor.append(buffer!, withPresentationTime: frameTime)) {
+      // Error!
+      print(videoWriter!.error!)
+    }
+    
+    print("frameCount :\(frameCount)")
+    frameCount += 1
+  }
+  
+  
+  //終わったら後始末をしてURLを返す
+  func finished(_ completion:@escaping (URL)->()){
+    // 動画生成終了
+    if writerInput == nil || videoWriter == nil{
+      return
+    }
+    writerInput!.markAsFinished()
+    videoWriter!.endSession(atSourceTime: CMTimeMake(Int64((__int32_t(frameCount)) *  __int32_t(time)), fps))
+    videoWriter!.finishWriting(completionHandler: {
+      // Finish!
+      print("movie created.")
+      self.writerInput = nil
+      if self.url != nil {
+        completion(self.url!)
+      }
+    })
+  }
+  
+  //ピクセルバッファへの変換
   func pixelBufferFromCGImage(cgImage: CGImage) -> CVPixelBuffer {
     
     let options = [
@@ -168,7 +205,9 @@ class MovieCreator: NSObject {
     return pxBuffer!
   }
   
-  private func resizeImage(image:UIImage,contentSize:CGSize) -> UIImage{
+  
+  //リサイズが必要なら
+  func resizeImage(image:UIImage,contentSize:CGSize) -> UIImage{
     // リサイズ処理
     let origWidth  = Int(image.size.width)
     let origHeight = Int(image.size.height)
@@ -189,7 +228,16 @@ class MovieCreator: NSObject {
     let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     
-    return resizeImage!
+    // 切り抜き処理
+    
+    let cropRect  = CGRect(
+      x:CGFloat((resizeWidth - Int(contentSize.width)) / 2),
+      y:CGFloat((resizeHeight - Int(contentSize.height)) / 2),
+      width:contentSize.width, height:contentSize.height)
+    let cropRef   = (resizeImage?.cgImage)!.cropping(to: cropRect)
+    let cropImage = UIImage(cgImage: cropRef!)
+    
+    return cropImage
   }
   
 }
