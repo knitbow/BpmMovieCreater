@@ -42,6 +42,7 @@ class MakeViewController: UIViewController {
   var imageArray: [UIImage] = [UIImage]()
   //１枚めの画像かどうか
   var isFirstTap = true
+  var filterImage = UIImage()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -75,8 +76,11 @@ class MakeViewController: UIViewController {
   // movieボタン押下
   @IBAction func movieBtn(_ sender: Any) {
     
-    self.movieCreator.time = Int(60 * tempoLength)
-    
+    // 1枚の写真で使われる時間
+//    self.movieCreator.time = Int(60 * tempoLength)
+    // FPS
+    self.movieCreator.time = Int(1)
+
     //全てのカメラロールの画像を取得する。
     let fetchOptions = PHFetchOptions();
     
@@ -103,23 +107,45 @@ class MakeViewController: UIViewController {
         // this one is key
         requestOptions.isSynchronous = true
         
-        // imageを取得
-        var filterImage = UIImage()
-        PHImageManager.default().requestImage(for: asset , targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (pickedImage, info) in
+          // imageを取得
+          PHImageManager.default().requestImage(for: asset , targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.aspectFit, options: requestOptions, resultHandler: { (pickedImage, info) in
+            
+            // フィルター定義
+            let toonFilter = MonochromeFilter()
+            self.filterImage = pickedImage!.filterWithOperation(toonFilter)
+            
+          })
           
-          // フィルター定義
-          let toonFilter = LuminanceRangeReduction()
-          filterImage = pickedImage!.filterWithOperation(toonFilter)
-          self.imageArray.append(filterImage)
-        })
+          // 縦の写真は取り込まない
+          if self.filterImage.size.width <= self.filterImage.size.height {
+            return
+          }
         
-        //１枚目の画像だけセットアップを含む
-        if self.isFirstTap {
-          self.movieCreator.createFirst(image: filterImage, size: CGSize(width:1920,
-                                                              height:1080))
-          self.isFirstTap = false
-        }else{
-          self.movieCreator.createSecond(image: filterImage)
+        // リサイズ処理(1920)
+        let reSize = self.resizeUIImageByWidth(image: self.filterImage, width: 1920)
+        // フレーム分ループ（1秒60回）画像拡大処理
+        for j in 0..<Int(30 * self.tempoLength) {
+         autoreleasepool {
+            let width = Double(reSize.size.width) * (1 + ((Double(j)+1)/20))
+            let height = Double(reSize.size.height) * (1 + ((Double(j)+1)/20))
+            let editSize = reSize.ResizeÜIImage(width: CGFloat(width), height: CGFloat(height))
+            
+            // 切り抜き処理
+            let cropRect  = CGRect(
+              x:CGFloat(((editSize?.size.width)! - CGFloat(1920)) / 2),
+              y:CGFloat(((editSize?.size.height)! - CGFloat(1080)) / 2),
+              width:1920, height:1080)
+            let cropRef   = (editSize?.cgImage)!.cropping(to: cropRect)
+            let cropImage = UIImage(cgImage: cropRef!)
+            
+            //１枚目の画像だけセットアップを含む
+            if self.isFirstTap {
+              self.movieCreator.createFirst(image: cropImage, size: reSize.size)
+              self.isFirstTap = false
+            }else{
+              self.movieCreator.createSecond(image: cropImage)
+            }
+          }
         }
         i = i + 1
       }
@@ -145,6 +171,59 @@ class MakeViewController: UIViewController {
     alertController.addAction(defaultAction)
     present(alertController, animated: true, completion: nil)
 
+  }
+  
+  /**
+   * 横幅を指定してUIImageをリサイズする
+   * @params image: 対象の画像
+   * @params width: 基準となる横幅
+   * @return 横幅をwidthに、縦幅はアスペクト比を保持したサイズにリサイズしたUIImage
+   */
+  func resizeUIImageByWidth(image: UIImage, width: Double) -> UIImage {
+    // オリジナル画像のサイズから、アスペクト比を計算
+    let aspectRate = image.size.height / image.size.width
+    // リサイズ後のWidthをアスペクト比を元に、リサイズ後のサイズを取得
+    let resizedSize = CGSize(width: width, height: width * Double(aspectRate))
+    // リサイズ後のUIImageを生成して返却
+    UIGraphicsBeginImageContext(resizedSize)
+    image.draw(in: CGRect(x: 0, y: 0, width: resizedSize.width, height: resizedSize.height))
+    let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return resizedImage!
+  }
+  
+  //リサイズが必要なら
+  func resizeImage(image:UIImage,contentSize:CGSize) -> UIImage{
+    // リサイズ処理
+    let origWidth  = Int(image.size.width)
+    let origHeight = Int(image.size.height)
+    var resizeWidth:Int = 0, resizeHeight:Int = 0
+    if (origWidth < origHeight) {
+      resizeWidth = Int(contentSize.width)
+      resizeHeight = origHeight * resizeWidth / origWidth
+    } else {
+      resizeHeight = Int(contentSize.height)
+      resizeWidth = origWidth * resizeHeight / origHeight
+    }
+    
+    let resizeSize = CGSize(width:CGFloat(resizeWidth), height:CGFloat(resizeHeight))
+    UIGraphicsBeginImageContext(resizeSize)
+    
+    image.draw(in: CGRect(x:0,y: 0,width: CGFloat(resizeWidth), height:CGFloat(resizeHeight)))
+    
+    let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    // 切り抜き処理
+    
+    let cropRect  = CGRect(
+      x:CGFloat((resizeWidth - Int(contentSize.width)) / 2),
+      y:CGFloat((resizeHeight - Int(contentSize.height)) / 2),
+      width:contentSize.width, height:contentSize.height)
+    let cropRef   = (resizeImage?.cgImage)!.cropping(to: cropRect)
+    let cropImage = UIImage(cgImage: cropRef!)
+    
+    return cropImage
   }
   
   // 動画と動画のマージ
@@ -369,6 +448,40 @@ class MakeViewController: UIViewController {
   
 }
 
+extension UIImage{
+  
+  // Resizeするクラスメソッド.
+  func ResizeÜIImage(width : CGFloat, height : CGFloat)-> UIImage!{
+    
+    // 指定された画像の大きさのコンテキストを用意.
+    UIGraphicsBeginImageContext(CGSize(width: width, height: height))
+    
+    // コンテキストに自身に設定された画像を描画する.
+    self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
+    
+    // コンテキストからUIImageを作る.
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    
+    // コンテキストを閉じる.
+    UIGraphicsEndImageContext()
+    
+    return newImage
+  }
+  
+  // 比率だけ指定する場合
+  func resize(ratio: CGFloat) -> UIImage {
+    let resizedSize = CGSize(width: Int(self.size.width * ratio), height: Int(self.size.height * ratio))
+    UIGraphicsBeginImageContextWithOptions(resizedSize, false, 2)
+    draw(in: CGRect(x: 0, y: 0, width: resizedSize.width, height: resizedSize.height))
+    let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return resizedImage!
+  }
+  
+}
+
+
+
 // メディアピッカーデリゲート
 extension MakeViewController: MPMediaPickerControllerDelegate {
   
@@ -398,41 +511,42 @@ extension MakeViewController: MPMediaPickerControllerDelegate {
       self?.bpmLabel.text = bpm
       
       // テンポによる計算(5秒程度になるように計算)
+      let i = 0.0
       switch Double(bpm)! {
       case 50..<60:
-        self?.tempoLength = 60 / Double(bpm)! * 5
+        self?.tempoLength = 60 / Double(bpm)! * (5 - i)
       case 60..<70:
-        self?.tempoLength = 60 / Double(bpm)! * 5
+        self?.tempoLength = 60 / Double(bpm)! * (5 - i)
       case 70..<80:
-        self?.tempoLength = 60 / Double(bpm)! * 6
+        self?.tempoLength = 60 / Double(bpm)! * (6 - i)
       case 80..<90:
-        self?.tempoLength = 60 / Double(bpm)! * 7
+        self?.tempoLength = 60 / Double(bpm)! * (7 - i)
       case 90..<100:
-        self?.tempoLength = 60 / Double(bpm)! * 8
+        self?.tempoLength = 60 / Double(bpm)! * (8 - i)
       case 100..<110:
-        self?.tempoLength = 60 / Double(bpm)! * 9
+        self?.tempoLength = 60 / Double(bpm)! * (9 - i)
       case 110..<120:
-        self?.tempoLength = 60 / Double(bpm)! * 10
+        self?.tempoLength = 60 / Double(bpm)! * (10 - i)
       case 120..<130:
-        self?.tempoLength = 60 / Double(bpm)! * 10
+        self?.tempoLength = 60 / Double(bpm)! * (10 - i)
       case 130..<140:
-        self?.tempoLength = 60 / Double(bpm)! * 11
+        self?.tempoLength = 60 / Double(bpm)! * (11 - i)
       case 140..<150:
-        self?.tempoLength = 60 / Double(bpm)! * 12
+        self?.tempoLength = 60 / Double(bpm)! * (12 - i)
       case 150..<160:
-        self?.tempoLength = 60 / Double(bpm)! * 13
+        self?.tempoLength = 60 / Double(bpm)! * (13 - i)
       case 160..<170:
-        self?.tempoLength = 60 / Double(bpm)! * 14
+        self?.tempoLength = 60 / Double(bpm)! * (14 - i)
       case 170..<180:
-        self?.tempoLength = 60 / Double(bpm)! * 15
+        self?.tempoLength = 60 / Double(bpm)! * (15 - i)
       case 180..<190:
-        self?.tempoLength = 60 / Double(bpm)! * 15
+        self?.tempoLength = 60 / Double(bpm)! * (15 - i)
       case 190..<200:
-        self?.tempoLength = 60 / Double(bpm)! * 16
+        self?.tempoLength = 60 / Double(bpm)! * (16 - i)
       case 200..<210:
-        self?.tempoLength = 60 / Double(bpm)! * 17
+        self?.tempoLength = 60 / Double(bpm)! * (17 - i)
       default:
-        self?.tempoLength = 60 / Double(bpm)! * 18
+        self?.tempoLength = 60 / Double(bpm)! * (18 - i)
       }
       
       // テンポの設定

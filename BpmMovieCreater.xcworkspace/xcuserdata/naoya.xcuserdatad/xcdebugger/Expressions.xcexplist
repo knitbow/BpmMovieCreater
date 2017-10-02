@@ -3,7 +3,15 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1).(closure #1):MakeViewController.swift">
+         contextName = "MakeViewController.updateSongInformationUI(mediaItem : MPMediaItem) -&gt; ():MakeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Int(round(mediaItem.playbackDuration / tempoLength))">
+            </PersistentString>
+            <PersistentString
+               value = "sozaiAmount">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "MakeViewController.(mediaPicker(MPMediaPickerController, didPickMediaItems : MPMediaItemCollection) -&gt; ()).(closure #1):MakeViewController.swift">
@@ -17,7 +25,35 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1):MakeViewController.swift">
+         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1).(closure #1):MakeViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in MakeViewController.movieBtn(_:):MakeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Double(reSize.size.width) * (1 + ((Double(j)+1)/100))">
+            </PersistentString>
+            <PersistentString
+               value = "CGFloat(Double(reSize.size.width) * (1 + ((Double(j)+1)/100)))">
+            </PersistentString>
+            <PersistentString
+               value = "CGFloat(0)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MakeViewController.movieBtn(Any) -&gt; ():MakeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "audioPlayer?.url! as! NSURL">
+            </PersistentString>
+            <PersistentString
+               value = "imageArray">
+            </PersistentString>
+            <PersistentString
+               value = "sozaiAmount">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "MovieCreator.finished((URL) -&gt; ()) -&gt; ():MovieCreator.swift">
@@ -28,29 +64,47 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MakeViewController.updateSongInformationUI(mediaItem : MPMediaItem) -&gt; ():MakeViewController.swift">
+         contextName = "MovieCreator.createSecond(image:):MovieCreator.swift">
          <PersistentStrings>
             <PersistentString
-               value = "Int(round(mediaItem.playbackDuration / tempoLength))">
+               value = "__int32_t(frameCount)">
             </PersistentString>
             <PersistentString
-               value = "sozaiAmount">
+               value = "CMTimeGetSeconds(CMTimeMake(Int64(__int32_t(frameCount) * __int32_t(frameCount)), fps))">
+            </PersistentString>
+            <PersistentString
+               value = "frameTime.seconds">
+            </PersistentString>
+            <PersistentString
+               value = "fps">
+            </PersistentString>
+            <PersistentString
+               value = "time">
+            </PersistentString>
+            <PersistentString
+               value = "CMTimeMake(Int64(__int32_t(frameCount) * __int32_t(frameCount)), fps)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MakeViewController.movieBtn(Any) -&gt; ():MakeViewController.swift">
+         contextName = "MovieCreator.createFirst(image:size:):MovieCreator.swift">
          <PersistentStrings>
             <PersistentString
-               value = "sozaiAmount">
+               value = "frameTime.seconds">
             </PersistentString>
             <PersistentString
-               value = "imageArray">
+               value = "fps">
             </PersistentString>
             <PersistentString
-               value = "audioPlayer?.url! as! NSURL">
+               value = "time">
+            </PersistentString>
+            <PersistentString
+               value = "frameTime.timescale">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1):MakeViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

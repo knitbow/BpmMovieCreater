@@ -18,15 +18,16 @@ class MovieCreator {
   var frameCount = 0
   
   // FPS
-  let fps: __int32_t = 60
-  var time:Int = 60    // (time / fps)   VCからいじる
+//  let fps: __int32_t = 60
+  let fps: __int32_t = 30 // for文の数字
+  var time:Int = 1    // (time / fps)   VCからいじる
   
   var videoWriter:AVAssetWriter?
   var writerInput:AVAssetWriterInput?
   var adaptor:AVAssetWriterInputPixelBufferAdaptor!
   
   //適当に画像サイズ
-  let imageSize = CGSize(width:1280,height:960)
+  let imageSize = CGSize(width:1920,height:1080)
   
   
   //イチバン最初はこれを呼び出す
@@ -93,7 +94,8 @@ class MovieCreator {
     print(second)
     
     //画像のリサイズと整形
-    let resize = resizeImage(image: image, contentSize: imageSize)
+//    let resize = resizeImage(image: image, contentSize: imageSize)
+    let resize = image
     
     // CGImageからBufferを生成
     buffer = self.pixelBufferFromCGImage(cgImage: resize.cgImage!)
@@ -104,7 +106,6 @@ class MovieCreator {
       print("adaptError")
       print(videoWriter!.error!)
     }
-    
     frameCount += 1
     
   }
@@ -130,7 +131,8 @@ class MovieCreator {
     print(second)
     
     // CGImageからBufferを生成
-    let resize = resizeImage(image: image, contentSize: imageSize)
+//    let resize = resizeImage(image: image, contentSize: imageSize)
+    let resize = image
     buffer = self.pixelBufferFromCGImage(cgImage: resize.cgImage!)
     
     // 生成したBufferを追加
