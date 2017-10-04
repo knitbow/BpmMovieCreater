@@ -40,9 +40,19 @@ class MakeViewController: UIViewController {
   var sozaiAmount = Int()
   // 写真配列
   var imageArray: [UIImage] = [UIImage]()
-  //１枚めの画像かどうか
+  // １枚めの画像かどうか
   var isFirstTap = true
+  // 初めてムービーを作成するかどうか
+  var isFirstMovie = true
+  // フィルター
   var filterImage = UIImage()
+  
+  // 動画URL
+  var movieURL = URL(string:"")
+  // 画像動画URL
+  var picMovieURL = URL(string:"")
+  // 結合動画URL
+  var mergeMovieURL = URL(string:"")
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -76,12 +86,10 @@ class MakeViewController: UIViewController {
   // movieボタン押下
   @IBAction func movieBtn(_ sender: Any) {
     
-    // 1枚の写真で使われる時間
-//    self.movieCreator.time = Int(60 * tempoLength)
     // FPS
     self.movieCreator.time = Int(1)
 
-    //全てのカメラロールの画像を取得する。
+    // カメラロールの画像を取得する。
     let fetchOptions = PHFetchOptions();
     
     var date:NSDate = NSDate();
@@ -89,17 +97,41 @@ class MakeViewController: UIViewController {
     
     fetchOptions.predicate = NSPredicate(format: "creationDate > %@", date);
     fetchOptions.sortDescriptors =  [NSSortDescriptor(key: "creationDate", ascending: false)];
-    let assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+    let assets = PHAsset.fetchAssets(with: fetchOptions)
     print(assets.debugDescription);
     
     var i = 0
     assets.enumerateObjects({ obj, idx, stop in
       autoreleasepool {
-        if(i == self.sozaiAmount){
+        
+        // 素材の数だけ回れば終わり
+        if i == self.sozaiAmount {
           return
         }
         
         let asset:PHAsset = obj as PHAsset;
+        
+        // 動画編集処理
+        if asset.mediaType == .video {
+          
+          i = i + 1
+          // URLの取得
+          self.movieURL = self.getURL(ofPhotoWith: asset)
+
+          // 初期の場合、次のオブジェクト
+          if self.isFirstMovie {
+            self.isFirstMovie = false
+            self.mergeMovieURL = self.movieURL
+            return
+          }
+          
+          // 動画のマージを行う
+          self.mergeMovieURL = self.mergeMovie(firstMoviePathUrl: self.mergeMovieURL as! NSURL, secondMoviePathUrl: self.movieURL as! NSURL)
+          
+          return
+        }
+        
+        // 画像編集処理
         let requestOptions = PHImageRequestOptions()
         requestOptions.resizeMode = .exact
         requestOptions.deliveryMode = .highQualityFormat
@@ -107,27 +139,27 @@ class MakeViewController: UIViewController {
         // this one is key
         requestOptions.isSynchronous = true
         
-          // imageを取得
-          PHImageManager.default().requestImage(for: asset , targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.aspectFit, options: requestOptions, resultHandler: { (pickedImage, info) in
-            
-            // フィルター定義
-            let toonFilter = MonochromeFilter()
-            self.filterImage = pickedImage!.filterWithOperation(toonFilter)
-            
-          })
+        // imageを取得
+        PHImageManager.default().requestImage(for: asset , targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.aspectFit, options: requestOptions, resultHandler: { (pickedImage, info) in
           
-          // 縦の写真は取り込まない
-          if self.filterImage.size.width <= self.filterImage.size.height {
-            return
-          }
+          // フィルター定義
+          let toonFilter = MonochromeFilter()
+          self.filterImage = pickedImage!.filterWithOperation(toonFilter)
+          
+        })
+        
+        // 縦の写真は取り込まない
+        if self.filterImage.size.width <= self.filterImage.size.height {
+          return
+        }
         
         // リサイズ処理(1920)
         let reSize = self.resizeUIImageByWidth(image: self.filterImage, width: 1920)
-        // フレーム分ループ（1秒60回）画像拡大処理
-        for j in 0..<Int(30 * self.tempoLength) {
+        // フレーム分ループ（1秒60回）画像拡大処理 debug中 30に戻すこと
+        for j in 0..<Int(1 * self.tempoLength) {
          autoreleasepool {
-            let width = Double(reSize.size.width) * (1 + ((Double(j)+1)/20))
-            let height = Double(reSize.size.height) * (1 + ((Double(j)+1)/20))
+            let width = Double(reSize.size.width) * (1 + ((Double(j)+1)/100))
+            let height = Double(reSize.size.height) * (1 + ((Double(j)+1)/100))
             let editSize = reSize.ResizeÜIImage(width: CGFloat(width), height: CGFloat(height))
             
             // 切り抜き処理
@@ -147,21 +179,32 @@ class MakeViewController: UIViewController {
             }
           }
         }
+        
+        // ライブラリへの保存
+        let semaphore = DispatchSemaphore(value: 0)
+        self.movieCreator.finished { (url) in
+          self.picMovieURL = url
+          semaphore.signal()
+        }
+        semaphore.wait()
+
+        // 動画のマージを行う
+        self.mergeMovieURL = self.mergeMovie(firstMoviePathUrl: self.mergeMovieURL as! NSURL, secondMoviePathUrl: self.picMovieURL as! NSURL)
         i = i + 1
       }
     });
     
-    // ライブラリへの保存
-    var movieURL = URL(string:"")
-    let semaphore = DispatchSemaphore(value: 0)
-    self.movieCreator.finished { (url) in
-      movieURL = url
-      semaphore.signal()
-    }
-    semaphore.wait()
+//    // ライブラリへの保存
+//    var movieURL = URL(string:"")
+//    let semaphore = DispatchSemaphore(value: 0)
+//    self.movieCreator.finished { (url) in
+//      movieURL = url
+//      semaphore.signal()
+//    }
+//    semaphore.wait()
 
     // 音声と動画のマージ
-    self.mergeAudio(audioURL: self.audioPlayer!.url! as NSURL, moviePathUrl: movieURL! as NSURL) { (url) in
+    self.mergeAudio(audioURL: self.audioPlayer!.url! as NSURL, moviePathUrl: self.mergeMovieURL! as NSURL) { (url) in
       self.compMovieURL = url
     }
 
@@ -170,6 +213,35 @@ class MakeViewController: UIViewController {
     dismiss(animated: true,completion: nil)
     alertController.addAction(defaultAction)
     present(alertController, animated: true, completion: nil)
+
+  }
+    
+  func getURL(ofPhotoWith mPhasset: PHAsset) -> URL{
+
+
+    let options: PHVideoRequestOptions = PHVideoRequestOptions()
+    options.deliveryMode = .highQualityFormat
+    options.version = .original
+    var urlStr2 = URL(string:"")
+
+    let semaphore = DispatchSemaphore(value: 0)
+    PHImageManager.default().requestAVAsset(forVideo: mPhasset, options: options, resultHandler: { (asset, audioMix, info) in
+      
+      if let tokenStr = info?["PHImageFileSandboxExtensionTokenKey"] as? String {
+        let tokenKeys = tokenStr.components(separatedBy: ";")
+        let urlStr = tokenKeys.filter { $0.contains("/private/var/mobile/Media") }.first
+        urlStr2 = URL(string:urlStr!)
+        if let urlStr = urlStr {
+          if let url = URL(string: urlStr) {
+            print(url.lastPathComponent)
+            print(url.pathExtension)
+          }
+        }
+      }
+      defer {semaphore.signal() }
+    })
+    semaphore.wait(timeout: DispatchTime.distantFuture)
+    return urlStr2!
 
   }
   

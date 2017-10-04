@@ -3,15 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MakeViewController.updateSongInformationUI(mediaItem : MPMediaItem) -&gt; ():MakeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Int(round(mediaItem.playbackDuration / tempoLength))">
-            </PersistentString>
-            <PersistentString
-               value = "sozaiAmount">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1):MakeViewController.swift">
       </ContextState>
       <ContextState
          contextName = "MakeViewController.(mediaPicker(MPMediaPickerController, didPickMediaItems : MPMediaItemCollection) -&gt; ()).(closure #1):MakeViewController.swift">
@@ -45,13 +37,13 @@
          contextName = "MakeViewController.movieBtn(Any) -&gt; ():MakeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "audioPlayer?.url! as! NSURL">
+               value = "sozaiAmount">
             </PersistentString>
             <PersistentString
                value = "imageArray">
             </PersistentString>
             <PersistentString
-               value = "sozaiAmount">
+               value = "audioPlayer?.url! as! NSURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -60,6 +52,14 @@
          <PersistentStrings>
             <PersistentString
                value = "time">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MakeViewController.getURL(ofPhotoWith:):MakeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mPhasset">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -104,7 +104,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MakeViewController.(movieBtn(Any) -&gt; ()).(closure #1):MakeViewController.swift">
+         contextName = "MakeViewController.updateSongInformationUI(mediaItem : MPMediaItem) -&gt; ():MakeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Int(round(mediaItem.playbackDuration / tempoLength))">
+            </PersistentString>
+            <PersistentString
+               value = "sozaiAmount">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
